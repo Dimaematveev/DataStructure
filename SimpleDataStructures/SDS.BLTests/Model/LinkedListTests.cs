@@ -46,7 +46,19 @@ namespace SDS.BL.Model.Tests
             //Assert
             Assert.ThrowsException<ArgumentNullException>(() => new LinkedList<string>(data), "Исключение при добавлении null!");
         }
-
+        [TestMethod()]
+        public void AddArrayParam_DataNotNullListEmpty_AddItem()
+        {
+            //Arrange
+            int[] data = new int[] {1,2,3,4,5,6 };
+            LinkedList<int> linkedList = new LinkedList<int>();
+            //Act
+            linkedList.Add(data);
+            //Assert
+            Assert.AreEqual(data[0], linkedList.Head.Data);
+            Assert.AreEqual(data[5], linkedList.Tail.Data);
+            Assert.AreEqual(6, linkedList.Count);
+        }
 
         [TestMethod()]
         public void AddOneParam_DataNotNullListEmpty_AddItem()

@@ -7,10 +7,23 @@ using System.Threading.Tasks;
 
 namespace SDS.BL.Model
 {
+    /// <summary>
+    /// Связный список.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class LinkedList<T>:IEnumerable
     {
+        /// <summary>
+        /// Голова
+        /// </summary>
         public Item<T> Head;
+        /// <summary>
+        /// Хвост
+        /// </summary>
         public Item<T> Tail;
+        /// <summary>
+        /// Количество элементов
+        /// </summary>
         public int Count { get; private set; }
 
         public LinkedList()
@@ -25,14 +38,22 @@ namespace SDS.BL.Model
             Initialization(data);
         }
 
-        
-        public void Add(T[] datas)
+        /// <summary>
+        /// Добавить список элементов
+        /// </summary>
+        /// <param name="datas">Массив элементов для добавления</param>
+        public void Add(IEnumerable<T> datas)
         {
             foreach (var data in datas)
             {
                 Add(data);
             }
         }
+
+        /// <summary>
+        /// Добавить один элемент
+        /// </summary>
+        /// <param name="data">Элемент для домавления</param>
         public void Add(T data)
         {
             if (Count==0)
@@ -45,7 +66,11 @@ namespace SDS.BL.Model
             Tail = item;
             Count++;
         }
-
+        /// <summary>
+        /// Удалить первый элемент
+        /// </summary>
+        /// <param name="data">Элемент который надо удалить</param>
+        /// <returns>true если получилось удалить, false не получилось удалить</returns>
         public bool RemoveFirst(T data)
         {
             var current = Head;
@@ -83,7 +108,11 @@ namespace SDS.BL.Model
             }
             return false;
         }
-
+        /// <summary>
+        /// Удаляет все вхождения элемента
+        /// </summary>
+        /// <param name="item">Элемент для удаления</param>
+        /// <returns>true если получилось удалить, false не получилось удалить</returns>
         public bool RemoveAll(T item)
         {
             bool ret = RemoveFirst(item);
@@ -93,17 +122,27 @@ namespace SDS.BL.Model
             }
             return ret;
         }
-
+        /// <summary>
+        /// Очистить список
+        /// </summary>
         public void Clear()
         {
             EmptyList();
         }
+
+        /// <summary>
+        /// Пустой список.
+        /// </summary>
         private void EmptyList()
         {
             Head = null;
             Tail = null;
             Count = 0;
         }
+        /// <summary>
+        /// Список с одним элементом
+        /// </summary>
+        /// <param name="data"></param>
         private void Initialization(T data)
         {
             var item = new Item<T>(data);
@@ -112,6 +151,10 @@ namespace SDS.BL.Model
             Count = 1;
         }
 
+        /// <summary>
+        /// Для цикла foreach
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator GetEnumerator()
         {
             var current = Head;
