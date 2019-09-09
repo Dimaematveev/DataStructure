@@ -26,7 +26,13 @@ namespace SDS.BL.Model
         }
 
         
-
+        public void Add(T[] datas)
+        {
+            foreach (var data in datas)
+            {
+                Add(data);
+            }
+        }
         public void Add(T data)
         {
             if (Count==0)
